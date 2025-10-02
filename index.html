@@ -1,0 +1,1067 @@
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة رحلة المهندس - المحتوى الأسبوعي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --accent-color: #4895ef;
+      --danger-color: #f72585;
+      --success-color: #4cc9f0;
+      --warning-color: #f8961e;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --gray-color: #6c757d;
+      --border-radius: 12px;
+      --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #fff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    header, footer {
+      background: var(--primary-color);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      color: white;
+      box-shadow: var(--box-shadow);
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    #logoutBtn {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--danger-color);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: var(--box-shadow);
+    }
+
+    #logoutBtn:hover {
+      background: #d11a6a;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .category-label {
+      font-size: 20px;
+      margin: 20px;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .week-content {
+      display: none;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .video-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .video-item {
+      margin-bottom: 30px;
+      background: #fff;
+      border-radius: var(--border-radius);
+      padding: 20px;
+      box-shadow: var(--box-shadow);
+      border: 1px solid #eee;
+      transition: var(--transition);
+    }
+
+    .video-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-item h4 {
+      margin-bottom: 15px;
+      font-size: 18px;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .bunny-video-container {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+      transition: var(--transition);
+    }
+
+    .bunny-video-container:hover {
+      transform: scale(1.01);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .bunny-video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .quiz {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      margin-top: 20px;
+      border: 1px solid #eee;
+    }
+
+    .quiz h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+
+    .quiz a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quiz a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+
+    #progressBar {
+      width: 90%;
+      max-width: 600px;
+      margin: 30px auto;
+      background: #e9ecef;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 12px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    #progressBarInner {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+      border-radius: 20px;
+    }
+
+    .week-navigation {
+      text-align: center;
+      margin: 30px auto;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .week-navigation button {
+      padding: 12px 25px;
+      background: var(--primary-color);
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      cursor: pointer;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: var(--box-shadow);
+    }
+
+    .week-navigation button:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    .week-navigation button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .category-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px auto;
+      gap: 15px;
+      padding: 0 20px;
+    }
+
+    .category-nav button {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .category-nav button:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    .week-content h2 {
+      color: var(--dark-color);
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* تحسينات للوضع المظلم الاختياري */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+        color: #f1f1f1;
+      }
+
+      .video-item, .quiz {
+        background: #1e1e1e;
+        border-color: #333;
+      }
+
+      .quiz {
+        background: #252525;
+      }
+
+      .video-item h4 {
+        color: var(--accent-color);
+      }
+    }
+
+    /* أنماط القائمة الجانبية */
+    .hamburger-menu {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .hamburger-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .hamburger-btn:hover {
+      background: var(--secondary-color);
+      transform: scale(1.1);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+      z-index: 999;
+      overflow-y: auto;
+      padding: 20px 0;
+    }
+
+    .sidebar.open {
+      right: 0;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .sidebar-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-header h3 {
+      margin: 0;
+      color: var(--primary-color);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--gray-color);
+    }
+
+    .sidebar-category {
+      margin: 15px 0;
+    }
+
+    .sidebar-category h4 {
+      padding: 10px 20px;
+      margin: 0;
+      color: var(--dark-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-category h4 i {
+      color: var(--primary-color);
+    }
+
+    .weeks-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .week-item {
+      padding: 12px 20px;
+      border-bottom: 1px solid #eee;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .week-item:hover {
+      background: #f8f9fa;
+    }
+
+    .week-item a {
+      color: var(--dark-color);
+      text-decoration: none;
+      flex-grow: 1;
+    }
+
+    .week-item.locked {
+      color: var(--gray-color);
+    }
+
+    .week-item.locked a {
+      color: var(--gray-color);
+    }
+
+    .week-item.current {
+      background: rgba(67, 97, 238, 0.1);
+      border-right: 3px solid var(--primary-color);
+    }
+
+    .week-item.current a {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .lock-icon {
+      color: var(--warning-color);
+      margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 20px;
+        padding: 0 40px;
+      }
+
+      #logoutBtn {
+        position: static;
+        margin: 15px auto 0;
+        transform: none;
+        width: fit-content;
+        display: inline-flex;
+      }
+
+      .category-nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .category-nav button,
+      .week-navigation button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .week-navigation {
+        flex-direction: column;
+        width: 90%;
+      }
+      
+      .hamburger-menu {
+        top: 15px;
+        right: 15px;
+      }
+      
+      .sidebar {
+        width: 85%;
+        right: -85%;
+      }
+    }
+    .locked-content {
+  position: relative;
+}
+
+.lock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  color: var(--warning-color);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.lock-overlay i {
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+  </style>
+</head>
+<body>
+<script>
+  const username = localStorage.getItem("studentEmail");
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwbX5xiWpuqmI84EaUN8ixbEDtIxpRUVg7MB024__PEniadqJFHoRjrpu7WVtp9OXrX9g/exec";
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", `${scriptURL}?username=${encodeURIComponent(username)}`, true);
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+      if (data.success && data.startDate) {
+        const cleanDate = new Date(data.startDate).toISOString().split("T")[0];
+        localStorage.setItem("courseStartDate", cleanDate);
+        startCourse(); // تابع تشغيل الدورة
+      } else {
+        alert("تعذر الحصول على تاريخ بدء الدورة. الرجاء إعادة المحاولة.");
+      }
+    } else {
+      alert("⚠️ فشل الاتصال بالخادم (HTTP error).");
+    }
+  };
+
+  xhr.onerror = function () {
+    alert("⚠️ حدث خطأ أثناء محاولة الاتصال بالخادم.");
+  };
+
+  xhr.send();
+</script>
+
+  <header>
+    <h1>مرحبا بك في دورة رحلة المهندس المحترف</h1>
+    <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+  </header>
+
+  <!-- قائمة Hamburger الجديدة -->
+  <div class="hamburger-menu">
+    <button class="hamburger-btn" id="hamburgerBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h3>أسابيع الدورة</h3>
+      <button class="close-btn" id="closeSidebar">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="sidebar-category">
+      <h4><i class="fas fa-cube"></i> Basic</h4>
+      <ul class="weeks-list" id="basicWeeks"></ul>
+    </div>
+    
+    <div class="sidebar-category">
+      <h4><i class="fas fa-rocket"></i> Professional</h4>
+      <ul class="weeks-list" id="proWeeks"></ul>
+    </div>
+  </div>
+
+  <div class="category-nav">
+    <button onclick="jumpToCategory('Basic')"><i class="fas fa-cube"></i> Basic</button>
+    <button onclick="jumpToCategory('Professional')"><i class="fas fa-rocket"></i> Professional</button>
+  </div>
+
+  <div id="progressBar">
+    <div id="progressBarInner"></div>
+  </div>
+
+  <main id="weeks"></main>
+
+  <div class="week-navigation">
+    <button onclick="navigateWeek(-1)"><i class="fas fa-arrow-right"></i> السابق</button>
+    <button onclick="navigateWeek(1)">التالي <i class="fas fa-arrow-left"></i></button>
+  </div>
+
+  <footer>
+    جميع الحقوق محفوظة &copy; 2025
+  </footer>
+
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("courseStartDate");
+      window.location.href = "https://najy-hub.github.io/Login-Course/";
+    }
+
+    if (!localStorage.getItem("courseStartDate")) {
+      localStorage.setItem("courseStartDate", new Date().toISOString());
+    }
+
+    const weeksContainer = document.getElementById("weeks");
+    let currentWeek = null;
+    const categoryIndexes = { Basic: 1, Professional: 8 };
+
+    const videoData = [
+      [
+        { title: "📘 Lec1: Principle of Operation  ", url: "https://iframe.mediadelivery.net/embed/460802/dce4ee28-5099-44df-9760-dddcf3609a95?autoplay=0" },
+        { title: "📘 Lec2: Solar Technology ", url: "https://iframe.mediadelivery.net/embed/460802/5c9229c6-4dc8-45cf-9b71-e6e4fce12da6?autoplay=0" },
+        { title: "📘 Lec3: Area & Efficiency ", url: "https://iframe.mediadelivery.net/embed/460802/7082d1ef-61a6-4ee4-82c0-ced096b8188f?autoplay=0" },
+        { title: "📘 Lec4: Data sheet and Nameplate ", url: "https://iframe.mediadelivery.net/embed/460802/4b7a1509-496d-4d39-ba3c-d635198fa551?autoplay=0" },
+        { title: "📘 Lec5: Strategy Of Select Pv Panels", url: "https://iframe.mediadelivery.net/embed/460802/cfe04177-caf9-4e6c-a873-9691897b0fc8?autoplay=0" }
+      ],
+      [
+        { title: "📘 Lec1:Behaviour of Electron", url: "https://iframe.mediadelivery.net/embed/460802/96a7baa2-15e4-46af-b385-a5ffdfa2e9be?autoplay=0" },
+        { title: "📘 Lec2:Energy Bands ", url: "https://iframe.mediadelivery.net/embed/460802/66b5260c-5552-4a88-8abb-69defa6ac944?autoplay=0" },
+        { title: "📘 Lec3 :Electron Journey1", url: "https://iframe.mediadelivery.net/embed/460802/747b6fb2-bc35-4b71-929c-fb16e82806c8?autoplay=0" },
+        { title: "📘 Lec4 :Electron Journey2", url: "https://iframe.mediadelivery.net/embed/460802/93af94fd-39b6-4527-9cac-5ca25bc6cd89?autoplay=0" },
+        
+      ],
+      [
+        { title: "📘 Lec1: Tilt Angle", url: "https://iframe.mediadelivery.net/embed/460802/6483f8fa-5209-4896-889a-91f1dce33ed7?autoplay=0" },
+        { title: "📘 Lec2: Inverters 1", url: "https://iframe.mediadelivery.net/embed/460802/bcc34246-6195-4724-b93d-398e7ae15303?autoplay=0" },
+        { title: "📘 Lec3: Inverters 2", url: "https://iframe.mediadelivery.net/embed/460802/2e1ee203-6b18-4bb3-9f62-07d3d905f376?autoplay=0" },
+    
+      ],
+       [
+        { title: "📘 Lec1: Energy Storage I", url: "https://iframe.mediadelivery.net/embed/460802/31a6b762-98a0-4a89-a56e-532f9df76766?autoplay=0" },
+        { title: "📘 Lec2: Energy Storage II", url: "https://iframe.mediadelivery.net/embed/460802/5592c64b-708f-4cad-9773-4441d64fc9aa?autoplay=0" },
+        { title: "📘 Lec3: Spacial Batteries", url: "https://iframe.mediadelivery.net/embed/460802/6da7a7e6-5049-4b7a-b982-85fcb6dbbe32?autoplay=0" },
+        { title: "📘 Lec4-1:Batteries I", url: "https://iframe.mediadelivery.net/embed/460802/b01b6b62-c700-48c9-8969-672d96534a7a?autoplay=0" },
+        { title: "📘 Lec4-2:Batteries II", url: "https://iframe.mediadelivery.net/embed/460802/ef0bb13e-89fb-4233-9431-8c3924a4e091?autoplay=0" },
+        { title: "📘 Lec4-3:Batteries III", url: "https://iframe.mediadelivery.net/embed/460802/63f72a46-fe96-451e-85ef-d3235e1eeb61?autoplay=0" },
+        { title: "📘 Bouns:VRB", url: "https://iframe.mediadelivery.net/embed/460802/05a5a81b-27fc-41e8-9df2-7f1edb58cc4e?autoplay=0" }
+      ],
+       [
+        { title: "📘 Lec1: Load Management", url: "https://iframe.mediadelivery.net/embed/460802/e1368f28-8899-44b9-977e-d7b2188883ff?autoplay=0" },
+        { title: "📘 Lec2: System Sizing & Selection", url: "https://iframe.mediadelivery.net/embed/460802/37812fff-fbc8-4b5f-a0cc-0ef70565c21b?autoplay=0" },
+        { title: "📘 Lec3: Protection & Safty", url: "https://iframe.mediadelivery.net/embed/460802/121d8171-d914-4597-97b1-3106b8dd2dab?autoplay=0" },
+        { title: "📘 Lec4: Grounding/AC Protection", url: "https://iframe.mediadelivery.net/embed/460802/eafe745b-3fa6-4c56-bade-add8d1f50354?autoplay=0" },
+        { title: "📘 Lec5: DC Protection", url: "https://iframe.mediadelivery.net/embed/460802/06989244-4a04-4089-9027-88fcc5962a17?autoplay=0" }
+      ],
+       [
+         { title: "📘 Lec1: Commercial Load", url: "https://iframe.mediadelivery.net/embed/460802/ed503771-6887-41cc-b1e1-5d67e814c696?autoplay=0" },
+        { title: "📘  Lec2: Main Components", url: "https://iframe.mediadelivery.net/embed/460802/6f5e17d8-67c8-4d80-a9c8-6cb164bfe4cb?autoplay=0" },
+        { title: "📘 Lec3: Voltage Reflection", url: "https://iframe.mediadelivery.net/embed/460802/4f8bd923-a9c9-4621-a312-9d6c34a75047?autoplay=0" },
+        { title: "📘  Lec4: Effect Cable Lenght", url: "https://iframe.mediadelivery.net/embed/460802/cb48f35c-6f66-49d9-96b3-b93f975adf6e?autoplay=0" },
+        { title: "📘  Lec5: Pumping Calculation", url: "https://iframe.mediadelivery.net/embed/460802/cbd3d91e-fb75-41ca-b4d4-a19c304dc671?autoplay=0" },
+         { title: "📘  Lec6: Real-World", url: "https://iframe.mediadelivery.net/embed/460802/c1ae5728-cf6c-4805-9d55-379250864517?autoplay=0" }
+         ],
+         [
+        { title: "📘 Lec1: PV SYST Installation", url: "https://iframe.mediadelivery.net/embed/460802/18a9e077-ff9d-488e-8e14-e1e9d3f215ad?autoplay=0" },
+        { title: "📘 Lec2: Frist Project_Location/Tilt angle ", url: "https://iframe.mediadelivery.net/embed/460802/8994c21c-4d67-451a-893b-04b27e1f8d07?autoplay=0" },
+        { title: "📘 Lec3: Frist Project_User Needs ", url: "https://iframe.mediadelivery.net/embed/460802/4f557cf6-d7bb-489a-8e8e-82b2e2f4c1cf?autoplay=0" },
+        { title: "📘 Lec4: Frist Project_System ", url: "https://iframe.mediadelivery.net/embed/460802/df70131d-f724-417a-8238-adddb7870da6?autoplay=0" },
+        { title: "📘 Lec5: Frist Project_Multi Varients ", url: "https://iframe.mediadelivery.net/embed/460802/e1f93c1b-f106-47a6-b83e-1e2fadb7bbb7?autoplay=0" },
+        { title: "📘 Lec6: Frist Project_Pumping ", url: "https://iframe.mediadelivery.net/embed/460802/5f0bcfe9-fa72-4b3a-a5e9-18cff65a8f8e?autoplay=0" }
+      ],
+     ];
+
+    const quizLinks = [
+      "https://najy-hub.github.io/Assignment1/", " https://najy-hub.github.io/Assignment2/", "https://najy-hub.github.io/Assignment3/", "quiz4.html", "quiz5.html", "quiz6.html", "quiz7.html",
+      "quiz8.html", "quiz9.html", "quiz10.html", "quiz11.html", "quiz12.html", "quiz13.html", "quiz14.html"
+    ];
+    
+    for (let i = 1; i <= videoData.length; i++) {
+      const weekDiv = document.createElement("div");
+      weekDiv.className = "week-content";
+      weekDiv.id = `week${i}`;
+
+      const type = i <= 7 ? 'Basic' : 'Professional';
+      const startDate = new Date(localStorage.getItem("courseStartDate"));
+      const allowedDate = new Date(startDate);
+      allowedDate.setDate(startDate.getDate() + (i - 1) * 7);
+      const currentDate = new Date();
+
+      const title = document.createElement("h2");
+      title.textContent = `الأسبوع ${i} - ${type}`;
+
+     if (currentDate < allowedDate) {
+  title.innerHTML += ` <i class="fas fa-lock" style="color: var(--warning-color);"></i>`;
+  weekDiv.classList.add('locked-content');
+  weekDiv.innerHTML += `
+    <div class="lock-overlay">
+      <i class="fas fa-lock"></i>
+      <p>هذا المحتوى سيفتح في ${allowedDate.toLocaleDateString()}</p>
+    </div>
+  `;
+} else {
+  title.innerHTML += ` <i class="fas fa-check-circle" style="color: var(--success-color);"></i>`;
+}
+
+      const ul = document.createElement("ul");
+      ul.className = "video-list";
+      videoData[i - 1].forEach(video => {
+        const li = document.createElement("li");
+        li.className = "video-item";
+        li.innerHTML = `
+          <h4>${video.title}</h4>
+          <div class="bunny-video-container">
+            <iframe src="${video.url}" allowfullscreen loading="lazy"></iframe>
+          </div>
+        `;
+        ul.appendChild(li);
+      });
+
+      const quiz = document.createElement("div");
+      quiz.className = "quiz";
+      quiz.innerHTML = `
+        <h3><i class="fas fa-clipboard-list"></i> اختبار الأسبوع</h3>
+        <p><a href="${quizLinks[i - 1]}" target="_blank"><i class="fas fa-external-link-alt"></i> رابط الاختبار</a></p>
+      `;
+
+      weekDiv.appendChild(title);
+      weekDiv.appendChild(ul);
+      weekDiv.appendChild(quiz);
+      weeksContainer.appendChild(weekDiv);
+    }
+
+    function updateProgressBar() {
+      const startDate = new Date(localStorage.getItem("courseStartDate"));
+      const currentDate = new Date();
+      const diffInDays = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+      const weekUnlocked = Math.min(14, Math.ceil((diffInDays + 1) / 7));
+      const percentage = (weekUnlocked / 14) * 100;
+      document.getElementById("progressBarInner").style.width = `${percentage}%`;
+    }
+
+    function changeWeekId(weekNumber) {
+      const allWeeks = document.querySelectorAll(".week-content");
+      allWeeks.forEach(div => div.style.display = "none");
+
+      const startDate = new Date(localStorage.getItem("courseStartDate"));
+      const currentDate = new Date();
+      const allowedDate = new Date(startDate);
+      allowedDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);
+
+      if (currentDate >= allowedDate) {
+        document.getElementById(`week${weekNumber}`).style.display = "block";
+        currentWeek = weekNumber;
+        updateSidebarActiveWeek();
+      } else {
+        alert("🔒 هذا الأسبوع لم يتم فتحه بعد. سيتم فتحه تلقائيًا في: " + allowedDate.toLocaleDateString());
+        
+        // حساب الأسبوع الحالي المسموح به
+    const diffInDays = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+    const allowedWeek = Math.min(14, Math.max(1, Math.floor(diffInDays / 7) + 1));
+    
+    // عرض الأسبوع المسموح به
+    document.getElementById(`week${allowedWeek}`).style.display = "block";
+    currentWeek = allowedWeek;
+    updateSidebarActiveWeek();
+  }
+}
+
+    function navigateWeek(step) {
+  if (currentWeek === null) return;
+  
+  const nextWeek = currentWeek + step;
+  if (nextWeek >= 1 && nextWeek <= videoData.length) {
+    const startDate = new Date(localStorage.getItem("courseStartDate"));
+    const currentDate = new Date();
+    const allowedDate = new Date(startDate);
+    allowedDate.setDate(startDate.getDate() + (nextWeek - 1) * 7);
+    
+    if (currentDate >= allowedDate) {
+      changeWeekId(nextWeek);
+    } else {
+      alert("لا يمكنك الوصول إلى هذا الأسبوع حتى: " + allowedDate.toLocaleDateString());
+    }
+  }
+}
+
+    function jumpToCategory(category) {
+      const week = categoryIndexes[category];
+      changeWeekId(week);
+    }
+
+    // إنشاء عناصر القائمة الجانبية
+    function createSidebarItems() {
+      const basicWeeksList = document.getElementById('basicWeeks');
+      const proWeeksList = document.getElementById('proWeeks');
+      
+      const startDate = new Date(localStorage.getItem("courseStartDate"));
+      const currentDate = new Date();
+      
+      // Basic Weeks (1-7)
+      for (let i = 1; i <= 7; i++) {
+        const allowedDate = new Date(startDate);
+        allowedDate.setDate(startDate.getDate() + (i - 1) * 7);
+        
+        const weekItem = document.createElement('li');
+        weekItem.className = 'week-item';
+        if (currentDate < allowedDate) {
+          weekItem.classList.add('locked');
+        }
+        
+        weekItem.innerHTML = `
+          <a href="#" onclick="changeWeekId(${i}); return false;">
+            الأسبوع ${i}
+          </a>
+          ${currentDate < allowedDate ? '<i class="fas fa-lock lock-icon"></i>' : ''}
+        `;
+        
+        basicWeeksList.appendChild(weekItem);
+      }
+      
+      // Professional Weeks (8-14)
+      for (let i = 8; i <= 14; i++) {
+        const allowedDate = new Date(startDate);
+        allowedDate.setDate(startDate.getDate() + (i - 1) * 7);
+        
+        const weekItem = document.createElement('li');
+        weekItem.className = 'week-item';
+        if (currentDate < allowedDate) {
+          weekItem.classList.add('locked');
+        }
+        
+        weekItem.innerHTML = `
+          <a href="#" onclick="changeWeekId(${i}); return false;">
+            الأسبوع ${i}
+          </a>
+          ${currentDate < allowedDate ? '<i class="fas fa-lock lock-icon"></i>' : ''}
+        `;
+        
+        proWeeksList.appendChild(weekItem);
+      }
+    }
+
+    // تحديث العنصر النشط في القائمة الجانبية
+    function updateSidebarActiveWeek() {
+      const allWeekItems = document.querySelectorAll('.week-item');
+      allWeekItems.forEach(item => {
+        item.classList.remove('current');
+        const weekNumber = parseInt(item.textContent.match(/\d+/)[0]);
+        if (weekNumber === currentWeek) {
+          item.classList.add('current');
+        }
+      });
+    }
+
+    // إدارة فتح وإغلاق القائمة الجانبية
+    function setupSidebar() {
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const closeSidebar = document.getElementById('closeSidebar');
+      const sidebar = document.getElementById('sidebar');
+      const sidebarOverlay = document.getElementById('sidebarOverlay');
+      
+      hamburgerBtn.addEventListener('click', () => {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+      
+      closeSidebar.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+      
+      sidebarOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+
+    // تهيئة الصفحة
+   function initPage() {
+  const startDate = new Date(localStorage.getItem("courseStartDate"));
+  const currentDate = new Date();
+  const diffInDays = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+  const allowedWeek = Math.min(14, Math.max(1, Math.floor(diffInDays / 7) + 1));
+  
+  changeWeekId(allowedWeek);
+  updateProgressBar();
+  createSidebarItems();
+  setupSidebar();
+}
+
+    initPage();
+
+     // إعدادات مهلة الجلسة (بالدقائق)
+  const SESSION_TIMEOUT = 180; // 30 دقيقة
+  const WARNING_BEFORE_TIMEOUT = 5; // تنبيه قبل 5 دقائق من الانتهاء
+  
+  // متغيرات تتبع الجلسة
+  let idleTimer;
+  let sessionTimeout;
+  let isSessionAboutToExpire = false;
+  let lastActivity = new Date();
+
+  // بدء تتبع الجلسة
+  function startSessionTimer() {
+    // إلغاء أي مؤقتات سابقة
+    clearTimeout(idleTimer);
+    clearTimeout(sessionTimeout);
+    
+    // حساب وقت التحذير ووقت الانتهاء
+    const warningTime = (SESSION_TIMEOUT - WARNING_BEFORE_TIMEOUT) * 60 * 1000;
+    const logoutTime = SESSION_TIMEOUT * 60 * 1000;
+    
+    // مؤقت للتحذير قبل الانتهاء
+    idleTimer = setTimeout(() => {
+      showSessionWarning();
+      isSessionAboutToExpire = true;
+      
+      // مؤقت لتسجيل الخروج بعد التحذير
+      sessionTimeout = setTimeout(logoutDueToInactivity, WARNING_BEFORE_TIMEOUT * 60 * 1000);
+    }, warningTime);
+    
+    // مؤقت احتياطي لتسجيل الخروج
+    sessionTimeout = setTimeout(logoutDueToInactivity, logoutTime);
+  }
+
+  // إعادة تعيين المؤقت عند النشاط
+  function resetSessionTimer() {
+    if (!isSessionAboutToExpire) {
+      lastActivity = new Date();
+      startSessionTimer();
+    }
+  }
+
+  // عرض تحذير انتهاء الجلسة
+  function showSessionWarning() {
+    const modal = document.createElement('div');
+    modal.id = 'sessionWarningModal';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.zIndex = '99999';
+    modal.style.color = 'white';
+    modal.style.fontFamily = 'Cairo, sans-serif';
+    modal.style.textAlign = 'center';
+    modal.style.padding = '20px';
+    
+    modal.innerHTML = `
+      <div style="background: #fff; color: #333; padding: 30px; border-radius: 10px; max-width: 500px;">
+        <h2 style="color: var(--danger-color); margin-top: 0;">
+          <i class="fas fa-exclamation-triangle"></i> جلسة على وشك الانتهاء
+        </h2>
+        <p>جلسة العمل على وشك الانتهاء بسبب عدم النشاط. سيتم تسجيل خروجك تلقائيًا خلال ${WARNING_BEFORE_TIMEOUT} دقائق.</p>
+        <p>هل ترغب في تمديد الجلسة؟</p>
+        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+          <button id="extendSessionBtn" style="
+            padding: 10px 25px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+          ">
+            <i class="fas fa-sync-alt"></i> تمديد الجلسة
+          </button>
+          <button id="logoutNowBtn" style="
+            padding: 10px 25px;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+          ">
+            <i class="fas fa-sign-out-alt"></i> تسجيل الخروج الآن
+          </button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    document.getElementById('extendSessionBtn').addEventListener('click', () => {
+      extendSession();
+      document.body.removeChild(modal);
+    });
+    
+    document.getElementById('logoutNowBtn').addEventListener('click', () => {
+      logout();
+    });
+  }
+
+  // تمديد الجلسة
+  function extendSession() {
+    isSessionAboutToExpire = false;
+    lastActivity = new Date();
+    startSessionTimer();
+    showToast('تم تمديد جلسة العمل بنجاح');
+  }
+
+  // تسجيل الخروج بسبب عدم النشاط
+  function logoutDueToInactivity() {
+    showToast('تم تسجيل الخروج تلقائياً بسبب عدم النشاط');
+    logout();
+  }
+
+  // عرض رسالة toast
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.backgroundColor = 'var(--primary-color)';
+    toast.style.color = 'white';
+    toast.style.padding = '12px 24px';
+    toast.style.borderRadius = '5px';
+    toast.style.zIndex = '9999';
+    toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+    toast.style.animation = 'fadeInOut 3s';
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      document.body.removeChild(toast);
+    }, 3000);
+  }
+
+  // إضافة أنيميشن لرسائل Toast
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // بدء تتبع النشاط
+  function setupActivityTracking() {
+    // تتبع أحداث المستخدم
+    ['mousemove', 'keypress', 'scroll', 'click', 'touchstart'].forEach(event => {
+      document.addEventListener(event, resetSessionTimer, { passive: true });
+    });
+    
+    // بدء المؤقت
+    startSessionTimer();
+  }
+
+  // تعديل دالة تسجيل الخروج لحفظ التقدم
+  function logout() {
+    // يمكنك هنا إضافة كود لحفظ التقدم الحالي إذا لزم الأمر
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("courseStartDate");
+    window.location.href = " https://najy-hub.github.io/NAjy_login/";
+  }
+
+  // بدء تتبع الجلسة عند تحميل الصفحة
+  document.addEventListener('DOMContentLoaded', () => {
+    setupActivityTracking();
+     
+    // تعديل زر تسجيل الخروج الأصلي
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+  });
+  </script>
+</body>
+</html>
